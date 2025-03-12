@@ -1,185 +1,60 @@
 const mongoose = require("mongoose");
 
-// Define the nearestSchema first
-const nearestSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    distance: {
-        type: Number,
-        required: true,
-    },
-}, { _id: false });
-
 // Define the propertySchema
 const propertySchema = new mongoose.Schema(
     {
-        property_type: {
-            type: String,
-            required: true,
-        },
-        society_name: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        location: {
-            type: String,
-            required: true,
-        },
-        bedroom_num: {
-            type: Number,
-            required: true,
-        },
-        balcony_num: {
-            type: Number,
-            required: true,
-        },
-        area: {
-            type: Number,
-            required: true,
-        },
-        price_per_sqft: {
-            type: Number,
-            required: true,
-        },
-        price: {
-            type: Number,
-            required: true,
-        },
-        age: {
-            type: String,
-            required: true,
-        },
-        furnish: {
-            type: String,
-            required: true,
-        },
-        amenity_luxury: {
-            type: String, 
-            required: true,
-        },
-        floor_num: {
-            type: String,
-            required: true,
-        },
-        latitude: {
-            type: Number,
-            required: true,
-        },
-        longitude: {
-            type: Number,
-            required: true,
-        },
-        total_floor: {
-            type: Number,
-            required: true,
-        },
-        description: {
-            type: String,
-            required: true,
-        },
-        facing_direction: {
-            type: String,
-            required: true,
-        },
-        image: {
-            type: String,
-            required: true,
-        },
-        loan_availability: {
-            type: Boolean,
-            required: true,
-        },
-        estimated_monthly_emi: {
-            type: Number,
-            required: true,
-        },
-        maintenance_fees: {
-            type: Number,
-            required: true,
-        },
-        property_tax: {
-            type: Number,
-            required: true,
-        },
-        stamp_duty_registration_costs: {
-            type: Number,
-            required: true,
-        },
-        nearest_schools: {
-            type: [nearestSchema],
-            default: [],
-        },
-        nearest_colleges: {
-            type: [nearestSchema], 
-            default: [],
-        },
-        nearest_hospitals: {
-            type: [nearestSchema], 
-            default: [],
-        },
-        nearest_markets: {
-            type: [nearestSchema], 
-            default: [],
-        },
-        nearest_public_transport: {
-            type: [nearestSchema], 
-            default: [],
-        },
-        nearest_restaurants: {
-            type: [nearestSchema],
-            default: [],
-        },
-        nearest_railway_stations: {
-            type: [nearestSchema], 
-            default: [],
-        },
-        nearest_malls: {
-            type: [nearestSchema],
-            default: [],
-        },
-        swimming_pool: {
-            type: Boolean,
-            required: true,
-        },
-        playground: {
-            type: Boolean,
-            required: true,
-        },
-        rera_registration_number: {
-            type: Number,
-            required: true,
-        },
-        visitor_parking: {
-            type: Boolean,
-            required: true,
-        },
-        intercom_facility: {
-            type: Boolean,
-            required: true,
-        },
-        power_backup: {
-            type: Boolean,
-            required: true,
-        },
-        water_supply: {
-            type: String,
-            required: true,
-        },
-        pet_friendly: {
-            type: Boolean,
-            required: true,
-        },
-        fire_safety_installed: {
-            type: Boolean,
-            required: true,
-        },
-    });
+        property_type: { type: String, required: true },
+        society_name: { type: String, required: true },
+        city: { type: String, required: true },
+        location: { type: String, required: true },
+        description: { type: String, default: "" },
+        area: { type: Number, required: true },
+        price_per_sqft: { type: Number },
+        price: { type: Number, required: true },
+        bedroom_num: { type: Number, required: true },
+        balcony_num: { type: Number, default: 0 },
+        floor_num: { type: Number, default: 1 },
+        total_floor: { type: Number, required: true },
+        age: { type: String, default: "New" },
+        furnish: { type: String, default: "Unfurnished" },
+        facing_direction: { type: String, default: "East" },
+        amenity_luxury: { type: String },
+        latitude: { type: Number, required: true },
+        longitude: { type: Number, required: true },
+        loan_availability: { type: Boolean, default: false },
+        estimated_monthly_emi: { type: Number },
+        maintenance_fees: { type: Number, default: 0 },
+        property_tax: { type: Number, default: 0 },
+        stamp_duty_registration_costs: { type: Number, default: 0 },
+        nearest_school_name: { type: String },
+        nearest_school_distance: { type: Number },
+        nearest_college_name: { type: String },
+        nearest_college_distance: { type: Number },
+        nearest_hospital_name: { type: String },
+        nearest_hospital_distance: { type: Number },
+        nearest_market_name: { type: String },
+        nearest_market_distance: { type: Number },
+        nearest_public_transport_name: { type: String },
+        nearest_public_transport_distance: { type: Number },
+        nearest_restaurant_name: { type: String },
+        nearest_restaurant_distance: { type: Number },
+        nearest_railway_station_name: { type: String },
+        nearest_railway_station_distance: { type: Number },
+        nearest_mall_name: { type: String },
+        nearest_mall_distance: { type: Number },
+        swimming_pool: { type: Boolean, default: false },
+        playground: { type: Boolean, default: false },
+        visitor_parking: { type: Boolean, default: false },
+        intercom_facility: { type: Boolean, default: false },
+        power_backup: { type: Boolean, default: false },
+        pet_friendly: { type: Boolean, default: false },
+        fire_safety_installed: { type: Boolean, default: false },
+        water_supply: { type: String, default: "24/7" },
+        rera_registration_number: { type: String },
+        images: { type: [String], default: [] },
+    },
+    { timestamps: true } // Adds createdAt and updatedAt fields
+);
 
 // Create the Property model
 const Property = mongoose.model("Property", propertySchema);
