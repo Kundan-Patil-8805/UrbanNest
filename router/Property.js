@@ -9,9 +9,13 @@ const upload = require("../middlewares/multer"); // Use multer middleware
 // Add a property with image upload
 router.post("/add", upload.single("image"), add);
 
+router.put('/listings/:id', edit);
+router.get('/listings/:id', show);
+router.get("/listings", listings);
+
+
+
 module.exports = router;
 
-// router.post('/add', upload.single('image'), propertyController.add); // Use multer upload middleware
-// router.put('/:id', propertyController.edit);
-// router.get('/:id', propertyController.show);
+
 
